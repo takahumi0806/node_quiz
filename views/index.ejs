@@ -6,17 +6,17 @@
   </head>
   <body id='body'>
     <h1><%= welcome %></h1>
-    <% if(problem) { %>
-      <% problem.forEach((element) => { %>
-      <div class="description"><%= element.description %></div>
+    <% if(problemDescription) { %>
+      <% problemDescription.forEach((problem) => { %>
+      <div class="description"><%= problem.description %></div>
       <% }); %>
     <% } %>
     <% if(problems) { %>
-      <% for (let problem in problems) { %>
-      <h3>[ジャンル]<%= problems[ problem ].category %></h3>
-      <h3>[難易度]<%= problems[ problem ].difficulty %></h3>
-      <p class="description"><%= problems[ problem ].question %></p>
-      <% } %>
+      <% problems.forEach((problem) => { %>
+      <h3>[ジャンル]<%= problem.category %></h3>
+      <h3>[難易度]<%= problem.difficulty %></h3>
+      <p class="description"><%= problem.question %></p>
+      <% }); %>
       <form action="/answer" method="post">
         <input type="hidden" name="number"  value=<%= number %>>
         <% quizs.forEach((element) => { %>

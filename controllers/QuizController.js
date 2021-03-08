@@ -9,7 +9,7 @@ module.exports = {
   doGetHome(req, res, next) {
     res.render('index', {
       welcome: 'ようこそ',
-      problem: [{description:'以下のボタンをクリックして下さい'}],
+      problemDescription: [{ description: '以下のボタンをクリックして下さい' }],
       problems: [],
       quizs: [],
       number: [],
@@ -34,11 +34,12 @@ module.exports = {
           quizs.push(element);
         });
         quizs.push(answerCorrect);
+        const quizSort = quizs.sort();
         res.render('index', {
           welcome: '問題１',
-          problem: [],
+          problemDescription: [],
           problems: [json.results[0]],
-          quizs: quizs,
+          quizs: quizSort,
           number: 1,
           buttonText: [],
         });
@@ -60,18 +61,21 @@ module.exports = {
         quizs.push(element);
       });
       quizs.push(answerCorrect);
+      const quizSort = quizs.sort();
       res.render('index', {
         welcome: `問題${1 + number}`,
-        problem: [],
+        problemDescription: [],
         problems: [questions[number]],
-        quizs: quizs,
+        quizs: quizSort,
         number: 1 + number,
         buttonText: [],
       });
     } else {
       res.render('index', {
         welcome: `正解は${answerCorrect.length}問です！！`,
-        problem: [{description:'再度チャレンジする時は以下をクリック'}],
+        problemDescription: [
+          { description: '再度チャレンジする時は以下をクリック' },
+        ],
         problems: [],
         quizs: [],
         number: [],
