@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  </head>
+  <body id='body'>
+    <h1><%= welcome %></h1>
+    <% if(problem) { %>
+      <% problem.forEach((element) => { %>
+      <div class="description"><%= element.description %></div>
+      <% }); %>
+    <% } %>
+    <% if(problems) { %>
+      <% for (let problem in problems) { %>
+      <h3>[ジャンル]<%= problems[ problem ].category %></h3>
+      <h3>[難易度]<%= problems[ problem ].difficulty %></h3>
+      <p class="description"><%= problems[ problem ].question %></p>
+      <% } %>
+      <form action="/answer" method="post">
+        <input type="hidden" name="number"  value=<%= number %>>
+        <% quizs.forEach((element) => { %>
+        <div><input type="submit" name="selection" value="<%= element %>"></div>
+        <% }); %>
+      </form>
+    <% } %>
+    <% if(buttonText) { %>
+      <% buttonText.forEach((element) => { %>
+        <a href=<%= element.url %>><button id='<%= element.id %>'><%= element.send %></button></a>
+      <% }); %>
+    <% } %>
+    <script>
+        $(document).ready(() => {
+          $('#btn').click(() => {
+            const quizWait = '<h1>' + '取得中'+ '</h1>'
+                      + '<div class="description">' + '少々お待ちください' + '</div>';
+            $('#body').html(quizWait);
+          })
+        })
+    </script>
+  </body>
+</html>
