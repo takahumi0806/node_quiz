@@ -9,7 +9,6 @@ const server = app.listen(3000, function () {
 });
 
 app.set('view engine', 'ejs');
-
 app.get('/', quizController.doGetHome);
 app.get('/quiz', quizController.doGetQuiz);
 app.post('/answer', quizController.doGetAnswer);
